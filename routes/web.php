@@ -34,3 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  Route::get('/songs', [App\Http\Controllers\SongController::class, 'index']);
  Route::get('/playlists', [App\Http\Controllers\PlaylistController::class, 'index']);
 //  Route::get('view-records','StudViewController@index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
