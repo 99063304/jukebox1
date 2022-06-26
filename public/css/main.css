@@ -27,6 +27,9 @@
     height: 80%;
     background-color: blue;
 }
+.content form{
+    display: inline-block;
+}
 .card{
     display: inline-block !important;
     margin-right: 20px;

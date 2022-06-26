@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Genres;
+use App\Models\Songs;
 
 class GenreController extends Controller
 {
@@ -23,15 +24,10 @@ class GenreController extends Controller
     }
     public function getIndex(Request $request)
     {
-        $oneGenre = $request->all();
-        // return $request->all();
-         return view('genre',['oneGenre'=>$oneGenre]);
+        $theId = $request->all()['genres'][0];
+        $song = Songs::where('genre_id', $theId)->get();
+         return view('genre',['oneGenre'=>$song]);
 
     }
-    // public function index2(Request $request)
-    // {
-    
-    //     return $request->all();
-    //     // dd($request); 
-    // }
 }
+ 

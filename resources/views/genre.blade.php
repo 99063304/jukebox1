@@ -3,10 +3,11 @@
 @section('content')
     @if(!isset($oneGenre))
         @foreach ($genres as $genre)
-        
         <form action="{{ route('index.store') }}" method="post">
+
             {{ csrf_field() }}
-            <input type="hidden" name="genres[]" value="{{ $genre }}">
+
+            <input type="hidden" name="genres[]" value="{{ $genre->id }}">
             <div class="card" style="height: 200px; width: 200px">
             <div class="dropdown">
             <button class="btn btn-secondary" type="submit" value=".Send " id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
@@ -18,9 +19,26 @@
             </div>
             </div>
         </form>
-        
+
         @endforeach
         @else();
+
+    >
+        @foreach ($oneGenre as $song)
+        <form action="{{ route('song.store') }}" method="post" style="width: 100%; height: 100px">
+           <div class="card" style="display: block; width: 100%; height: 100%">
+           {{ csrf_field() }}
+            <input type="hidden" name="genres[]" value="{{ $song->genre_id }}">
+
+            <button class="btn btn-secondary" type="submit" value=".Send " id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+              {{ $song->song_name }}
+            </button>
+           </div>
+           </form>
+        @endforeach
+
+
+
     @endif() 
 
 

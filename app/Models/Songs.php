@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Songs extends Model
 {
     use HasFactory;
+
 }

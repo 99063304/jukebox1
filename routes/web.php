@@ -30,8 +30,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::resource('post', 'PostController');
  Route::get('/genre', [App\Http\Controllers\GenreController::class, 'index']);
  Route::post('/genre', [App\Http\Controllers\GenreController::class, 'getIndex'])->name('index.store');
+  Route::post('/songs', [App\Http\Controllers\SongController::class, 'getSong'])->name('song.store');
+
+
 
  Route::get('/songs', [App\Http\Controllers\SongController::class, 'index']);
+//  Route::get('/songs', [App\Http\Controllers\GenreController::class, 'indexSong']);
+
  Route::get('/playlists', [App\Http\Controllers\PlaylistController::class, 'index']);
 //  Route::get('view-records','StudViewController@index');
 
