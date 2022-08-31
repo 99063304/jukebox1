@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Songs;
+use Illuminate\Support\Facades\Session;
 
 class SongController extends Controller
 {
@@ -16,15 +17,14 @@ class SongController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('songs');
+    { Session::flush();
+        $allSongs = Songs::All();
+        return view('songs', ['allSongs'=>$allSongs]);
     }
     public function getSong(Request $request)
     {
         $theId = $request->all();
-        // dd($theId['genres'][0]);
-        $theId = $theId['genres'][0];
-         $song = Songs::where('id', $theId)->get();
+        $song = Songs::find($theId['genres'][0]);
         return view('songs',['songs'=>$song]);
 
     }

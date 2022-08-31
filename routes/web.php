@@ -30,16 +30,27 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::resource('post', 'PostController');
  Route::get('/genre', [App\Http\Controllers\GenreController::class, 'index']);
  Route::post('/genre', [App\Http\Controllers\GenreController::class, 'getIndex'])->name('index.store');
-  Route::post('/songs', [App\Http\Controllers\SongController::class, 'getSong'])->name('song.store');
+ Route::post('/songs', [App\Http\Controllers\SongController::class, 'getSong'])->name('song.store');
 
 
 
  Route::get('/songs', [App\Http\Controllers\SongController::class, 'index']);
 //  Route::get('/songs', [App\Http\Controllers\GenreController::class, 'indexSong']);
+Route::group(['middleware' => 'auth'], function() {
 
- Route::get('/playlists', [App\Http\Controllers\PlaylistController::class, 'index']);
+  // put routes here...
+  Route::get('/playlists', [App\Http\Controllers\PlaylistController::class, 'index']);
+  Route::post('/playlists', [App\Http\Controllers\PlaylistController::class, 'toDoIndex'])->name('create.store');
+
+  Route::get('/playlist', [App\Http\Controllers\PlaylistController::class, 'index2'])->name('addSong.store');
+  //  Route::post('/playlist', [App\Http\Controllers\PlaylistController::class, 'addSongs'])->name('addSong.store');
+
+  
+
+});
+
 //  Route::get('view-records','StudViewController@index');
 
-Auth::routes();
+ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

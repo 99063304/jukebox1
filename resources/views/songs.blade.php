@@ -1,11 +1,25 @@
 @extends('layouts.header')
 
 @section('content')
- <!-- {{ $songs }} -->
+@if(isset($songs))
  <div>
-    <!-- <h1>Songname: {{ $songs->song_name }}</h1>
-    <p>Tijdsduur: {{ $songs->tijdsduur}}</p> -->
+    <p>Songname: {{ $songs->song_name }}</p>
+    <p>Tijdsduur: {{ $songs->tijds_duur}}</p> 
 
  </div>
+ @else
+ @foreach ($allSongs as $oneSong)
+  <form action="{{ route('song.store') }}" method="post" style="width: 100%; height: 100px">
+       <div class="card" style="display: block; width: 100%; height: 100%">
+       {{ csrf_field() }}
+       <input type="hidden" name="genres[]" value="{{ $oneSong->genre_id }}">
+            <button class="btn btn-secondary" type="submit" value=".Send " id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+             {{$oneSong->song_name}}
+               
+            </button>
+         </div>
+  </form>
+  @endforeach
+ @endif
 
 @endsection('content')

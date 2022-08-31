@@ -21,9 +21,7 @@
         </form>
 
         @endforeach
-        @else();
-
-    >
+        @else()
         @foreach ($oneGenre as $song)
         <form action="{{ route('song.store') }}" method="post" style="width: 100%; height: 100px">
            <div class="card" style="display: block; width: 100%; height: 100%">
