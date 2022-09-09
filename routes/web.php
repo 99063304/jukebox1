@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/playlists', [App\Http\Controllers\PlaylistController::class, 'toDoIndex'])->name('create.store');
 
   Route::get('/playlist', [App\Http\Controllers\PlaylistController::class, 'index2'])->name('addSong.store');
+  
+  Route::get('/playlistD', [App\Http\Controllers\PlaylistController::class, 'index3'])->name('deleteSong');
+
   //  Route::post('/playlist', [App\Http\Controllers\PlaylistController::class, 'addSongs'])->name('addSong.store');
 
   
