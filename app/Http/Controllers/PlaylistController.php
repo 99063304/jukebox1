@@ -26,10 +26,10 @@ class PlaylistController extends Controller
     {
 
         $theid = $request->all()['addSongo'];
+        UpdateSession::addSongsSession($theid);
         $allSongs = Songs::All();
         $theid = session::all(); 
 
-   
         return view('createPlaylist',['playlistname' => '1','AllSession'=>$theid,'allsongs'=>$allSongs]);
 
    
@@ -50,7 +50,15 @@ class PlaylistController extends Controller
         return view('createPlaylist',['playlistname'=>$theId,'allsongs'=>$allSongs]);
     }
     public function index3(Request $request){
-       dd('Het is gelukt');
+        $theId = $request->all();
+        $deleteId = $theId['deleteSong'];
+        $theId = session::all();
+        updateSession::deleteSong($deleteId);
+
+        $allSongs = Songs::all();
+
+
+        return view('createPlaylist',['playlistname' => '1','AllSession'=>$theId,'allsongs'=>$allSongs]);
     }
 
 }

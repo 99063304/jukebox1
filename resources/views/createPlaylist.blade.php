@@ -24,15 +24,15 @@
  
   
  
-  <select name="addSongo" id="cars">
+  <select name="deleteSong" id="cars">
     <?php $i = 0; ?>
     
-    @foreach($AllSession['SongName'][0] as $song) 
+    @foreach($AllSession['SongName'] as $song => $value) 
       @foreach($allsongs as $songs)
+        @if($songs['id'] == $value)
         <?php $i++;?>
-        @if($songs['id'] == $song)
-        <option value="">
-        {{ $songs['song_name'] }}
+        <option value="{{$song}}">
+        {{ $songs['song_name']  }}
         </option>
         @endif
       @endforeach
