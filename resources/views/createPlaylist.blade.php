@@ -1,8 +1,6 @@
 @extends('layouts.header')
 @section('content')
- <div>
 
- </div>
  <h1>PlaylistName: @if($playlistname != '1')  {{ $playlistname }}@else {{ $AllSession['playlistname'] }} @endif</h1>
  <form action="{{ route('addSong.store') }} ">
  {{ csrf_field() }}
@@ -40,7 +38,10 @@
   </select>
   <button type="submit">Verwijderen uit playlist</button>
  </form>
- 
+
+  <form action="{{ route('save.playlist') }} ">
+    <button type="submit">Save</button>
+  </form>
     @endif
 
  

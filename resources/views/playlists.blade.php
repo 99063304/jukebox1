@@ -8,7 +8,21 @@
         <button class="btn btn-secondary" type="submit" value=".Send " id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
             maak een playlist en pas naam aan
         </button>
-   </form>
+    </form>
+   
+    <form action="{{ route('old.playlist') }}" method="post" style="width: 100%; height: 100px">
+       {{ csrf_field() }}
+       <select name="gekozenPlaylist" >
+        @foreach ($oldPlaylists as $playlist)
+         <option value="{{ $playlist->id}}">{{ $playlist->playlist_name}}</option>
+         @endforeach
+       </select>
+        <button class="btn btn-secondary" type="submit" value=".Send " id="dropdownMenuButton" aria-haspopup="true" aria-expanded="false">
+            maak een playlist en pas naam aan
+        </button>
+    </form>
+
+
  </div>
  
 @endsection('content')

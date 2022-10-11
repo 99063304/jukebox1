@@ -47,6 +47,15 @@ Route::group(['middleware' => 'auth'], function() {
   
   Route::get('/playlistD', [App\Http\Controllers\PlaylistController::class, 'index3'])->name('deleteSong');
 
+  Route::get('/playlistS', [App\Http\Controllers\PlaylistController::class, 'index4'])->name('save.playlist');
+
+  Route::post('/playlistO', [App\Http\Controllers\PlaylistController::class, 'index5'])->name('old.playlist');
+
+  Route::post('/playlistOS', [App\Http\Controllers\PlaylistController::class, 'index6'])->name('addSongSave.store');
+
+  Route::post('/playlistOD', [App\Http\Controllers\PlaylistController::class, 'index7'])->name('deleteSongSave');
+
+
   //  Route::post('/playlist', [App\Http\Controllers\PlaylistController::class, 'addSongs'])->name('addSong.store');
 
   
