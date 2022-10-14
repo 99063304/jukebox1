@@ -17,7 +17,7 @@
 
     <form action="{{ route( 'deleteSongSave') }}" method='post'>
     {{ csrf_field() }}
-    <?php $count = 0;?>
+    <?php $count = 1;?>
         <select name="deleteSong" id="">
         @foreach($allsongs as $song)
 
@@ -32,8 +32,16 @@
 
         @endforeach
         </select>
+
+        <input hidden name='playlist_id' value='{{$playlistname->id}}'></input>
+
         <button type="submit">verwijderen</button>
     </form>
+<form action="" method='post'>
+{{ csrf_field() }}
+    <input name='playlist_id' value='{{$playlistname->id}}'></input>
+    <button type="submit"> VERWIJDER PLAYLIST</button>
+</form>
 
  
 @endsection('content') 

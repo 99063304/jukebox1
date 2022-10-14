@@ -128,10 +128,24 @@ class PlaylistController extends Controller
     }
 
     public function index7 (Request $request){
-        dd($request->all());
-        deleted = DB::table('saved_list_songs')->where('votes', '>', 100)->delete();
+       
+        $id = $request->all()['deleteSong'];
+        $list_id = $request->all()['playlist_id'];
+        
+        DB::table('saved_list_songs')->where('saved_list_id',$list_id)->limit($id,'1')->delete();
 
-
+        $currentURL = url()->current();
+        $newUrl = str_replace('OD', 's', $currentURL);
+        return Redirect::to($newUrl);
     }
+    public function index8 (Request $request){
+        $list_id = $request->all()['playlist_id'];
+        DB::table('saved_list_songs')->where('saved_list_id',$list_id)->delete();
+        DB::table('saved_list')->where('id',$list_id)->delete();
 
+        $currentURL = url()->current();
+        $newUrl = str_replace('PD', 's', $currentURL);
+        return Redirect::to($newUrl);
+ 
+    }
 }
