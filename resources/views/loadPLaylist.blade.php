@@ -37,11 +37,13 @@
 
         <button type="submit">verwijderen</button>
     </form>
-<form action="" method='post'>
+<form action="{{ route('deletePlaylist') }}" method='post'>
 {{ csrf_field() }}
-    <input name='playlist_id' value='{{$playlistname->id}}'></input>
+    <input hidden name='playlist_id' value='{{$playlistname->id}}'></input>
     <button type="submit"> VERWIJDER PLAYLIST</button>
 </form>
+
+<a href="{{ route('opvragenPlaylist') }}"></a>
 
  
 @endsection('content') 
