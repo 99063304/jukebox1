@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
 
   Route::post('/playlistPD', [App\Http\Controllers\PlaylistController::class, 'index8'])->name('deletePlaylist');
 
-  Route::post('/playlistOP', [App\Http\Controllers\PlaylistController::class, 'index9'])->name('opvragenPlaylist');
+  Route::get('/playlistOP', [App\Http\Controllers\PlaylistController::class, 'index9'])->name('opvragenPlaylist');
 
 
 

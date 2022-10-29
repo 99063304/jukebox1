@@ -149,8 +149,10 @@ class PlaylistController extends Controller
  
     }
     public function index9 (){
-        DB::table('saved_list')->where('user_id', Auth::id());
-        DB::table('saved_list_songs')->where('saved_list_id',$list_id)->delete();
+       $lijsten =  DB::table('saved_list')->where('user_id', Auth::id());
+       $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id); 
+
+        dd($lijsten);
     }
 
 }
