@@ -149,10 +149,15 @@ class PlaylistController extends Controller
  
     }
     public function index9 (){
-       $lijsten =  DB::table('saved_list')->where('user_id', Auth::id());
-       $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id); 
+       $lijsten =  DB::table('saved_list')->where('user_id', '2')->get();
+       $lijstenArray = array();
 
-        dd($lijsten);
+        foreach($lijsten as $lijst){
+            $list_id = $lijst->id;
+            $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id)->get(); 
+            $lijstenArray[$lijst->playlist_name] = $lijstlieden;
+            $lijstenArray[$lijst->playlist_name]['id'] = $list_id;
+            return view('opvragen',['lijsten' => $lijstlieden]);
+        }
     }
-
 }
