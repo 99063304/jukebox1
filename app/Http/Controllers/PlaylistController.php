@@ -157,7 +157,7 @@ class PlaylistController extends Controller
             $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id)->get(); 
             $lijstenArray[$lijst->playlist_name] = $lijstlieden;
             $lijstenArray[$lijst->playlist_name]['id'] = $list_id;
-            return view('opvragen',['lijsten' => $lijstlieden]);
+            return view('opvragen',['lijsten' => $lijstenArray]);
         }
     }
 }
