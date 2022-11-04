@@ -1,7 +1,11 @@
 @extends('layouts.header')
 @section('content')
  
-<?php print_r($lijsten . '<br>'); ?>
+
+<p>
+  <?php dd($savedList);?>
+
+    </p>
 
  
 @endsection('content') 

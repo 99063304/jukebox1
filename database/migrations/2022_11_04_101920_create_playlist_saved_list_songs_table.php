@@ -1,5 +1,5 @@
 <?php
-
+// car_product
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('car_product', function (Blueprint $table) {
-            $table->integer('car_id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->foreign('car_id')
+        Schema::create('playlist_saved_list_songs', function (Blueprint $table) {
+            $table->integer('playlist_saved_list_id')->unsigned();
+            $table->integer('song_id')->unsigned();
+            $table->foreign('playlist_saved_list_id')
             ->references('id')
-            ->on('cars')
+            ->on('playlist_saved_list')
             ->onDelete('cascade');
-            $table->foreign('product_id')
+            $table->foreign('song_id')
             ->references('id')
-            ->on('cars')
+            ->on('songs')
             ->onDelete('cascade');
+
+
         });
     }
 
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_products');
+        Schema::dropIfExists('saved_list_songs');
     }
 };

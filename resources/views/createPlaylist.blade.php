@@ -1,6 +1,5 @@
 @extends('layouts.header')
 @section('content')
-
  <h1>PlaylistName: @if($playlistname != '1')  {{ $playlistname }}@else {{ $AllSession['playlistname'] }} @endif</h1>
  <form action="{{ route('addSong.store') }} ">
  {{ csrf_field() }}

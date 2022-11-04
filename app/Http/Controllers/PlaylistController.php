@@ -23,7 +23,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $last = DB::table('saved_list')
+        $last = DB::table('playlist_saved_list')
         ->select('*')
         ->where('user_id', Auth::id())
         ->get();
@@ -81,16 +81,18 @@ class PlaylistController extends Controller
          'user_id'=> Auth::id()
 
         ]);
-        $last = DB::table('saved_list')
+        $last = DB::table('playlist_saved_list')
                 ->selectRaw('id')
                 ->orderByRaw('id DESC')
                 ->limit(1)
                 ->get();
 
+      
+
         foreach (session::all()['SongName'] as $key) {
             PlaylistSavedListSongs::create([
                 'song_id'=> $key, 
-                'saved_list_id'=> $last[0]->id]);
+                'playlist_saved_list_id'=> $last[0]->id]);
          }
         session::flush();
         $currentURL = url()->current();
@@ -102,8 +104,8 @@ class PlaylistController extends Controller
     
     public function index5 (Request $request){
         $theId = $request->all()['gekozenPlaylist'];        
-        $PlaylistSavedList = DB::table('saved_list')->find($theId);
-         $PlaylistSavedListSongs = DB::table('saved_list_songs')->where('saved_list_id', $theId)->get();
+        $PlaylistSavedList = DB::table('playlist_saved_list')->find($theId);
+         $PlaylistSavedListSongs = DB::table('playlist_saved_list_songs')->where('playlist_saved_list_id', $theId)->get();
 
          
         $allSongs = DB::table('songs')->get();
@@ -118,8 +120,11 @@ class PlaylistController extends Controller
 
         PlaylistSavedListSongs::create([
             'song_id' => $ids['addSongo'],
-            'saved_list_id' => $ids['playlist_id'] 
+            'playlist_saved_list_id' => $ids['playlist_id'] 
            ]);
+
+        
+          
 
            $currentURL = url()->current();
     
@@ -132,7 +137,7 @@ class PlaylistController extends Controller
         $id = $request->all()['deleteSong'];
         $list_id = $request->all()['playlist_id'];
         
-        DB::table('saved_list_songs')->where('saved_list_id',$list_id)->limit($id,'1')->delete();
+        DB::table('playlist_saved_list_songs')->where('playlist_saved_list_id',$list_id)->limit($id,'1')->delete();
 
         $currentURL = url()->current();
         $newUrl = str_replace('OD', 's', $currentURL);
@@ -140,8 +145,8 @@ class PlaylistController extends Controller
     }
     public function index8 (Request $request){
         $list_id = $request->all()['playlist_id'];
-        DB::table('saved_list_songs')->where('saved_list_id',$list_id)->delete();
-        DB::table('saved_list')->where('id',$list_id)->delete();
+        DB::table('playlist_saved_list_songs')->where('playlist_saved_list_id',$list_id)->delete();
+        DB::table('playlist_saved_list')->where('id',$list_id)->delete();
 
         $currentURL = url()->current();
         $newUrl = str_replace('PD', 's', $currentURL);
@@ -149,15 +154,22 @@ class PlaylistController extends Controller
  
     }
     public function index9 (){
-       $lijsten =  DB::table('saved_list')->where('user_id', '2')->get();
-       $lijstenArray = array();
+     $savedList = PlaylistSavedList::find(13);
+     dd($savedList->songs);
+    //    $lijsten =  DB::table('saved_list')->where('user_id', '2')->get();
+    //    $lijstenArray = array();
 
-        foreach($lijsten as $lijst){
-            $list_id = $lijst->id;
-            $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id)->get(); 
-            $lijstenArray[$lijst->playlist_name] = $lijstlieden;
-            $lijstenArray[$lijst->playlist_name]['id'] = $list_id;
-            return view('opvragen',['lijsten' => $lijstenArray]);
-        }
+        // foreach($lijsten as $lijst){
+        //     $list_id = $lijst->id;
+        //     $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id)->get(); 
+        //     $lijstenArray[$lijst->playlist_name] = $lijstlieden;
+        //     $lijstenArray[$lijst->playlist_name]['id'] = $list_id;
+
+            
+          
+        // }
+       
+        // $songs = Songs::All();
+        return view('opvragen')->with('savedList',$savedList);
     }
 }

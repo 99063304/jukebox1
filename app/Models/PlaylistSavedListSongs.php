@@ -9,10 +9,10 @@ class PlaylistSavedListSongs extends Model
 {
     use HasFactory;
 
-    protected $table = 'saved_list_songs';
+    protected $table = 'playlist_saved_list_songs';
 
     protected $fillable = [
-       'song_id','saved_list_id'
+       'song_id','playlist_saved_list_id'
     ];
     public $timestamps = false;
 

@@ -1,5 +1,5 @@
 <?php
-
+//car  
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('saved_list_songs', function (Blueprint $table) {
-            $table->integer('song_id');
-            $table->id('saved_list_id');
+        Schema::create('playlist_saved_list', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('playlist_name');
+            $table->integer('user_id');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saved_list_songs');
+        Schema::dropIfExists('saved_list');
     }
 };
