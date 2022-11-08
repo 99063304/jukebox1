@@ -153,23 +153,30 @@ class PlaylistController extends Controller
         return Redirect::to($newUrl);
  
     }
-    public function index9 (){
-     $savedList = PlaylistSavedList::find(13);
-     dd($savedList->songs);
+    public function index9(){
+        $savedListNames = PlaylistSavedList::all();
+        return view('lijstopvragen')->with('savedListNames',$savedListNames);
+    }
+    public function index10 (){
+     $savedListNames = PlaylistSavedList::all();
+     $wholeList = array();
+
+     foreach($savedListNames as $savedListName){
+        $id = $savedListName['id'];
+
+        $list = PlaylistSavedList::find($id);
+        $wholeList[$savedListName['playlist_name']] = $list->songs;
+    }
+   
+    // $savedList = PlaylistSavedList::find(13);
+
+      //  dd($savedList->songs);
     //    $lijsten =  DB::table('saved_list')->where('user_id', '2')->get();
     //    $lijstenArray = array();
 
-        // foreach($lijsten as $lijst){
-        //     $list_id = $lijst->id;
-        //     $lijstlieden =  DB::table('saved_list_songs')->where('saved_list_id',$list_id)->get(); 
-        //     $lijstenArray[$lijst->playlist_name] = $lijstlieden;
-        //     $lijstenArray[$lijst->playlist_name]['id'] = $list_id;
 
-            
-          
-        // }
        
         // $songs = Songs::All();
-        return view('opvragen')->with('savedList',$savedList);
+        return view('opvragen')->with('savedList',$wholeList);
     }
 }
