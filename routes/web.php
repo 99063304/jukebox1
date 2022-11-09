@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth'], function() {
 
   Route::get('/playlistOP', [App\Http\Controllers\PlaylistController::class, 'index9'])->name('opvragenPlaylist');
 
-  Route::get('/playlist/{id}', [App\Http\Controllers\PlaylistController::class, 'index10'])->name('playlist');
+  Route::get('/playlistOP/{id}', [App\Http\Controllers\PlaylistController::class, 'index10'])->name('playlist');
 
 
 

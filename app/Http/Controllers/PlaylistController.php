@@ -158,8 +158,7 @@ class PlaylistController extends Controller
         return view('lijstopvragen')->with('savedListNames',$savedListNames);
     }
     public function index10 (Request $request){
-     $savedList = PlaylistSavedList::find($request->route('id'));
-
+        $savedList = PlaylistSavedList::find($request->route('id'));
         return view('opvragen')->with('savedList',$savedList);
     }
 }

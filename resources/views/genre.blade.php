@@ -1,6 +1,7 @@
 @extends('layouts.header')
 
 @section('content')
+  
     @if(!isset($oneGenre))
         @foreach ($genres as $genre)
         <form action="{{ route('index.store') }}" method="post">

@@ -18,8 +18,9 @@ class GenreController extends Controller
      */
     public function index()
     {
-        $genres = Genres::All();
-        // dd($genres); 
+        $genres = Genres::all();
+
+         
         return view('genre',['genres'=>$genres]);
     }
     public function getIndex(Request $request)

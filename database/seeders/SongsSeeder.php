@@ -7,21 +7,31 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class GenreSeeder extends Seeder
+
+
+
+class SongsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run($genreCount)
     {
-        
        
+       
+        
 
-         DB::table('genres')->insert([
+       for($i = 0; $i <= 5; $i++){
+        DB::table('songs')->insert([
             'id' => null,
-            'genre_name' => Str::random(10),
+            'song_name' => Str::random(10),
+            'genre_id' => rand(1,$genreCount),
+            'tijds_duur' => rand(1,5),
         ]);
+       }
+
+        
     }
 }
