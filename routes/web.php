@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\SongController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,58 +22,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Post  endpoint
-// Route::get('/post', [PostController::class, 'index']);
-// Route::resource('post', 'PostController');
- Route::get('/genre', [App\Http\Controllers\GenreController::class, 'index']);
- Route::post('/genre', [App\Http\Controllers\GenreController::class, 'getIndex'])->name('index.store');
- Route::post('/songs', [App\Http\Controllers\SongController::class, 'getSong'])->name('song.store');
-
-
-
- Route::get('/songs', [App\Http\Controllers\SongController::class, 'index']);
-//  Route::get('/songs', [App\Http\Controllers\GenreController::class, 'indexSong']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/genre', [GenreController::class, 'index']);
+Route::post('/genre', [GenreController::class, 'getIndex'])->name('index.store');
+Route::post('/songs', [SongController::class, 'getSong'])->name('song.store');
+Route::get('/songs', [SongController::class, 'index']);
 Route::group(['middleware' => 'auth'], function() {
-
-  // put routes here...
-  Route::get('/playlists', [App\Http\Controllers\PlaylistController::class, 'index']);
-  Route::post('/playlists', [App\Http\Controllers\PlaylistController::class, 'toDoIndex'])->name('create.store');
-
-  Route::get('/playlist', [App\Http\Controllers\PlaylistController::class, 'index2'])->name('addSong.store');
-  
-  Route::get('/playlistD', [App\Http\Controllers\PlaylistController::class, 'index3'])->name('deleteSong');
-
-  Route::get('/playlistS', [App\Http\Controllers\PlaylistController::class, 'index4'])->name('save.playlist');
-
-  Route::post('/playlistO', [App\Http\Controllers\PlaylistController::class, 'index5'])->name('old.playlist');
-
-  Route::post('/playlistOS', [App\Http\Controllers\PlaylistController::class, 'index6'])->name('addSongSave.store');
-
-  Route::post('/playlistOD', [App\Http\Controllers\PlaylistController::class, 'index7'])->name('deleteSongSave');
-
-  Route::post('/playlistPD', [App\Http\Controllers\PlaylistController::class, 'index8'])->name('deletePlaylist');
-
-  Route::get('/playlistOP', [App\Http\Controllers\PlaylistController::class, 'index9'])->name('opvragenPlaylist');
-
-  Route::get('/playlistOP/{id}', [App\Http\Controllers\PlaylistController::class, 'index10'])->name('playlist');
-
-
-
-  
-
-  
-
+  Route::get('/playlists', [PlaylistController::class, 'index']);
+  Route::post('/playlists', [PlaylistController::class, 'toDoIndex'])->name('create.store');
+  Route::get('/playlist', [PlaylistController::class, 'index2'])->name('addSong.store');  
+  Route::get('/playlistD', [PlaylistController::class, 'index3'])->name('deleteSong');
+  Route::get('/playlistS', [PlaylistController::class, 'index4'])->name('save.playlist');
+  Route::post('/playlistO', [PlaylistController::class, 'index5'])->name('old.playlist');
+  Route::post('/playlistOS', [PlaylistController::class, 'index6'])->name('addSongSave.store');
+  Route::post('/playlistOD', [PlaylistController::class, 'index7'])->name('deleteSongSave');
+  Route::post('/playlistPD', [PlaylistController::class, 'index8'])->name('deletePlaylist');
+  Route::get('/playlistOP', [PlaylistController::class, 'index9'])->name('opvragenPlaylist');
+  Route::get('/playlistOP/{id}', [PlaylistController::class, 'index10'])->name('playlist');
 });
-
-//  Route::get('view-records','StudViewController@index');
-
- Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
+Route::get('/home', [HomeController::class, 'index'])->name('home');
