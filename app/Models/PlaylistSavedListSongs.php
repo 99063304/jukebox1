@@ -12,7 +12,7 @@ class PlaylistSavedListSongs extends Model
     protected $table = 'playlist_saved_list_songs';
 
     protected $fillable = [
-       'song_id','playlist_saved_list_id'
+       'songs_id','playlist_saved_list_id'
     ];
     public $timestamps = false;
 

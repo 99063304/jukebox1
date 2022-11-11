@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use DB;
-use App\Models\Playlists;
 use Illuminate\Http\Request;
 use App\Models\Songs;
 use App\Models\UpdateSession;
@@ -23,10 +22,11 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $last = DB::table('playlist_saved_list')
-        ->select('*')
-        ->where('user_id', Auth::id())
-        ->get();
+        $last =  PlaylistSavedList::where('user_id', '=', Auth::id())->get(); 
+        //DB::table('playlist_saved_list')
+        //->select('*')
+        //->where('user_id', Auth::id())
+        //->get();
         
         $oldPlaylists = '';
         if($last){
@@ -36,41 +36,29 @@ class PlaylistController extends Controller
     }
     public function index2(Request $request)
     {
-
         $theid = $request->all()['addSongo'];
         UpdateSession::addSongsSession($theid);
         $allSongs = Songs::All();
         $theid = session::all(); 
 
-
         return view('createPlaylist',['playlistname' => '1','AllSession'=>$theid,'allsongs'=>$allSongs]);
-
-   
     }
 
     public function toDoIndex(Request $request)
      {  
-         
         $theId = $request->all()['create'];
         UpdateSession::addSongSession($theId);
 
-
-    
-
         $allSongs = Songs::All();
-
-
         return view('createPlaylist',['playlistname'=>$theId,'allsongs'=>$allSongs]);
     }
     public function index3(Request $request){
         $theId = $request->all();
         $deleteId = $theId['deleteSong'];
         $theId = session::all();
+
         updateSession::deleteSong($deleteId);
-
         $allSongs = Songs::all();
-
-
         return view('createPlaylist',['playlistname' => '1','AllSession'=>$theId,'allsongs'=>$allSongs]);
     }
     public function index4(){
@@ -81,63 +69,60 @@ class PlaylistController extends Controller
          'user_id'=> Auth::id()
 
         ]);
-        $last = DB::table('playlist_saved_list')
-                ->selectRaw('id')
-                ->orderByRaw('id DESC')
-                ->limit(1)
-                ->get();
+        $last = PlaylistSavedList::select('id')->orderBy('id', 'DESC')->first();
+        
+        //DB::table('playlist_saved_list')
+          //      ->selectRaw('id')
+            //    ->orderByRaw('id DESC')
+              //  ->limit(1)
+                //->get();
 
       
 
         foreach (session::all()['SongName'] as $key) {
             PlaylistSavedListSongs::create([
-                'song_id'=> $key, 
-                'playlist_saved_list_id'=> $last[0]->id]);
+                'songs_id'=> $key, 
+                'playlist_saved_list_id'=> $last->id]);
          }
         session::flush();
-        $currentURL = url()->current();
-    
-        $newUrl = str_replace('S', 's', $currentURL);
-         return Redirect::to($newUrl);
 
+        $currentURL = url()->current();
+        $newUrl = str_replace('S', 's', $currentURL);
+        return Redirect::to($newUrl);
     }
     
     public function index5 (Request $request){
         $theId = $request->all()['gekozenPlaylist'];        
-        $PlaylistSavedList = DB::table('playlist_saved_list')->find($theId);
-         $PlaylistSavedListSongs = DB::table('playlist_saved_list_songs')->where('playlist_saved_list_id', $theId)->get();
+        $PlaylistSavedList = playlistSavedList::find($theId);
+        $PlaylistSavedListSongs = playlistSavedListSongs::where('playlist_saved_list_id', $theId)->get();
 
-         
-        $allSongs = DB::table('songs')->get();
-       
+        $allSongs = Songs::all();
         return view('loadPLaylist',['playlistname' => $PlaylistSavedList,'allsongs'=>$PlaylistSavedListSongs,'songs'=>$allSongs]);
-  
     }
     public function index6 (Request $request){
-
-    
         $ids = $request->all();
-
         PlaylistSavedListSongs::create([
-            'song_id' => $ids['addSongo'],
+            'songs_id' => $ids['addSongo'],
             'playlist_saved_list_id' => $ids['playlist_id'] 
            ]);
 
-        
-          
-
-           $currentURL = url()->current();
-    
-           $newUrl = str_replace('OS', 's', $currentURL);
-            return Redirect::to($newUrl);
+        $currentURL = url()->current();
+        $newUrl = str_replace('OS', 's', $currentURL);
+        return Redirect::to($newUrl);
     }
 
     public function index7 (Request $request){
-       
         $id = $request->all()['deleteSong'];
-        $list_id = $request->all()['playlist_id'];
+        $id = explode(".",$id);
+        $id2 = $id[1];
+        $id = $id[0];
         
-        DB::table('playlist_saved_list_songs')->where('playlist_saved_list_id',$list_id)->limit($id,'1')->delete();
+        $list_id = $request->all()['playlist_id'];
+
+        $gg = playlistSavedListSongs::where('playlist_saved_list_id',$list_id,'and')->where('songs_id',$id)->limit($id2,'1')->get();
+
+        //dd($gg);
+        /// playlistSavedListSongs::where('playlist_saved_list_id',$list_id,'and')->where('songs_id',$id)->limit($id2,'1')->delete();
 
         $currentURL = url()->current();
         $newUrl = str_replace('OD', 's', $currentURL);
@@ -145,13 +130,12 @@ class PlaylistController extends Controller
     }
     public function index8 (Request $request){
         $list_id = $request->all()['playlist_id'];
-        DB::table('playlist_saved_list_songs')->where('playlist_saved_list_id',$list_id)->delete();
-        DB::table('playlist_saved_list')->where('id',$list_id)->delete();
+        playlistSavedListSongs::where('playlist_saved_list_id',$list_id)->delete();
+        PlaylistSavedList::where('id',$list_id)->delete();
 
         $currentURL = url()->current();
         $newUrl = str_replace('PD', 's', $currentURL);
         return Redirect::to($newUrl);
- 
     }
     public function index9(){
         $savedListNames = PlaylistSavedList::all();

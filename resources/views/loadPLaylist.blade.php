@@ -17,21 +17,21 @@
 
     <form action="{{ route( 'deleteSongSave') }}" method='post'>
     {{ csrf_field() }}
-    <?php $count = 1;?>
-        <select name="deleteSong" id="">
+
+        <select name="deleteSong">
         @foreach($allsongs as $song)
 
         @foreach($songs as $song_name)
 
-        @if($song->song_id == $song_name->id)
-         
-            <option value="{{$count}}">{{ $song_name->song_name }}</option>
-            <?php $count++; ?>
+
+        @if($song->songs_id == $song_name->id)
+            <option value="{{$song_name->id}}">{{ $song_name->song_name }}</option>
         @endif
-        @endforeach
 
         @endforeach
+        @endforeach
         </select>
+    
 
         <input hidden name='playlist_id' value='{{$playlistname->id}}'></input>
 
