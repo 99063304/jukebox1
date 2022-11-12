@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('playlist_saved_list_songs', function (Blueprint $table) {
             $table->integer('playlist_saved_list_id')->unsigned();
-            $table->integer('song_id')->unsigned();
+            $table->integer('songs_id')->unsigned();
+            $table->id();
+
             $table->foreign('playlist_saved_list_id')
             ->references('id')
             ->on('playlist_saved_list')
             ->onDelete('cascade');
-            $table->foreign('song_id')
+            $table->foreign('songs_id')
             ->references('id')
             ->on('songs')
             ->onDelete('cascade');

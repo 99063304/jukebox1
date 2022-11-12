@@ -19,13 +19,13 @@ class SongController extends Controller
     public function index()
     { Session::flush();
         $allSongs = Songs::All();
-        return view('songs', ['allSongs'=>$allSongs]);
+        return view('songs', ['allSongs'=> $allSongs]);
     }
     public function getSong(Request $request)
     {
-        $theId = $request->all();
-        $song = Songs::find($theId['genres'][0]);
-        return view('songs',['songs'=>$song]);
+      //  $theId = $request->all();
+     //   $song = Songs::find($theId['genres'][0]);
+      //  return view('songs',['songs'=>$song]);
 
     }
 }

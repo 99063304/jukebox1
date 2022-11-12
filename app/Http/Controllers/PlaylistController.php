@@ -113,16 +113,13 @@ class PlaylistController extends Controller
 
     public function index7 (Request $request){
         $id = $request->all()['deleteSong'];
-        $id = explode(".",$id);
-        $id2 = $id[1];
-        $id = $id[0];
-        
-        $list_id = $request->all()['playlist_id'];
 
-        $gg = playlistSavedListSongs::where('playlist_saved_list_id',$list_id,'and')->where('songs_id',$id)->limit($id2,'1')->get();
+        
+       // $list_id = $request->all()['playlist_id'];
+
 
         //dd($gg);
-        /// playlistSavedListSongs::where('playlist_saved_list_id',$list_id,'and')->where('songs_id',$id)->limit($id2,'1')->delete();
+         playlistSavedListSongs::where('id',$id)->delete();
 
         $currentURL = url()->current();
         $newUrl = str_replace('OD', 's', $currentURL);

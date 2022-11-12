@@ -25,10 +25,10 @@ class GenreController extends Controller
     }
     public function getIndex(Request $request)
     {
-        $theId = $request->all()['genres'][0];
-        $song = Songs::where('genre_id', $theId)->get();
-         return view('genre',['oneGenre'=>$song]);
-
+     //   dd('____________________');
+     //   $theId = $request->all()['genres'][0];
+     //   $song = Songs::where('genre_id', $theId)->get();
+     //   return view('genre',['oneGenre'=>$song]);
     }
 }
  
