@@ -23,11 +23,6 @@ class PlaylistController extends Controller
     public function index()
     {
         $last =  PlaylistSavedList::where('user_id', '=', Auth::id())->get(); 
-        //DB::table('playlist_saved_list')
-        //->select('*')
-        //->where('user_id', Auth::id())
-        //->get();
-        
         $oldPlaylists = '';
         if($last){
             $oldPlaylists = $last;
@@ -70,14 +65,6 @@ class PlaylistController extends Controller
 
         ]);
         $last = PlaylistSavedList::select('id')->orderBy('id', 'DESC')->first();
-        
-        //DB::table('playlist_saved_list')
-          //      ->selectRaw('id')
-            //    ->orderByRaw('id DESC')
-              //  ->limit(1)
-                //->get();
-
-      
 
         foreach (session::all()['SongName'] as $key) {
             PlaylistSavedListSongs::create([
@@ -113,12 +100,6 @@ class PlaylistController extends Controller
 
     public function index7 (Request $request){
         $id = $request->all()['deleteSong'];
-
-        
-       // $list_id = $request->all()['playlist_id'];
-
-
-        //dd($gg);
          playlistSavedListSongs::where('id',$id)->delete();
 
         $currentURL = url()->current();
