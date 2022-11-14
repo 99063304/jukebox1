@@ -25,5 +25,7 @@ class GenreController extends Controller
         $song = Songs::where('genre_id', $theId)->get();
         return view('genre',['oneGenre'=>$song]);
     }
+    
+    
 }
  

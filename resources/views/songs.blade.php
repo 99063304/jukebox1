@@ -2,7 +2,7 @@
 
 @section('content')
 @if(isset($songs))
- <div>
+ <div class='card' style="width: 100%;">
    <p>Songname: {{ $songs->song_name }}</p>
    <p>Tijdsduur: {{ $songs->tijds_duur}}</p> 
  </div>

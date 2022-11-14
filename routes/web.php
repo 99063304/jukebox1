@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SongController;
-
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/genre', [GenreController::class, 'getIndex'])->name('index.store');
   Route::get('/songs', [SongController::class, 'index']);
   Route::post('/songs', [SongController::class, 'getSong'])->name('song.store');
-
   Route::get('/playlists', [PlaylistController::class, 'index']);
   Route::post('/playlists', [PlaylistController::class, 'toDoIndex'])->name('create.store');
   Route::get('/playlist', [PlaylistController::class, 'index2'])->name('addSong.store');  

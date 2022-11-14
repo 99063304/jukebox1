@@ -15,7 +15,7 @@ class SongController extends Controller
      */
     public function index()
     { 
-        Session::flush();
+      //  Session::flush();
         $allSongs = Songs::All();
         return view('songs', ['allSongs'=> $allSongs]);
     }

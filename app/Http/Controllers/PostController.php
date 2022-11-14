@@ -11,7 +11,7 @@ class PostController extends Controller
         return view('posts/index');
     }
     public function addSongs(Request $request){
-      dd($request->all());
+    
          return view('playlist');
         }
 }
