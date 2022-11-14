@@ -8,7 +8,7 @@
  </div>
  @else
  @foreach($allSongs as $oneSong)
-  <form action="{{ route('song') }}" method="post" style="width: 100%; height: 100px">
+  <form action="{{ route('song.store') }}" method="post" style="width: 100%; height: 100px">
        {{ csrf_field() }}  
       <div class="card" style="display: block; width: 100%; height: 100%">
          <input type="hidden" name="genres[]" value="{{ $oneSong->genre_id }}">

@@ -24,11 +24,12 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/genre', [GenreController::class, 'index']);
-Route::post('/genre', [GenreController::class, 'getIndex'])->name('index.store');
-Route::get('/songs', [SongController::class, 'index']);
-Route::post('/songs', [SongController::class, 'getSong'])->name('song');
 Route::group(['middleware' => 'auth'], function() {
+  Route::get('/genre', [GenreController::class, 'index']);
+  Route::post('/genre', [GenreController::class, 'getIndex'])->name('index.store');
+  Route::get('/songs', [SongController::class, 'index']);
+  Route::post('/songs', [SongController::class, 'getSong'])->name('song.store');
+
   Route::get('/playlists', [PlaylistController::class, 'index']);
   Route::post('/playlists', [PlaylistController::class, 'toDoIndex'])->name('create.store');
   Route::get('/playlist', [PlaylistController::class, 'index2'])->name('addSong.store');  
