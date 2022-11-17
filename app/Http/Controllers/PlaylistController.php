@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
 use Illuminate\Http\Request;
 use App\Models\Songs;
 use App\Models\UpdateSession;
@@ -34,7 +33,8 @@ class PlaylistController extends Controller
         $theid = $request->all()['addSongo'];
         UpdateSession::addSongsSession($theid);
         $allSongs = Songs::All();
-        $theid = session::all(); 
+        $theid = session::all();
+
 
         return view('createPlaylist',['playlistname' => '1','AllSession'=>$theid,'allsongs'=>$allSongs]);
     }
@@ -50,9 +50,9 @@ class PlaylistController extends Controller
     public function index3(Request $request){
         $theId = $request->all();
         $deleteId = $theId['deleteSong'];
-        $theId = session::all();
-
         updateSession::deleteSong($deleteId);
+        
+        $theId = session::all();
         $allSongs = Songs::all();
         return view('createPlaylist',['playlistname' => '1','AllSession'=>$theId,'allsongs'=>$allSongs]);
     }
@@ -71,7 +71,7 @@ class PlaylistController extends Controller
                 'songs_id'=> $key, 
                 'playlist_saved_list_id'=> $last->id]);
          }
-        session::flush();
+         updateSession::deleteAll();
 
         $currentURL = url()->current();
         $newUrl = str_replace('S', 's', $currentURL);
@@ -100,12 +100,13 @@ class PlaylistController extends Controller
 
     public function index7 (Request $request){
         $id = $request->all()['deleteSong'];
-         playlistSavedListSongs::where('id',$id)->delete();
+        playlistSavedListSongs::where('id',$id)->delete();
 
         $currentURL = url()->current();
         $newUrl = str_replace('OD', 's', $currentURL);
         return Redirect::to($newUrl);
-    }
+      
+    }  
     public function index8 (Request $request){
         $list_id = $request->all()['playlist_id'];
         playlistSavedListSongs::where('playlist_saved_list_id',$list_id)->delete();

@@ -37,6 +37,9 @@ class UpdateSession
     public static function deleteSong($id){
          Session::forget('SongName.' . $id);
     }
-
+    public static function deleteAll(){
+        Session::forget('SongName');
+        Session::forget('playlistname');
+   }
 
 }

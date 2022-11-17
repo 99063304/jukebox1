@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saved_list_songs');
+        Schema::dropIfExists('playlist_saved_list_songs');
     }
 };

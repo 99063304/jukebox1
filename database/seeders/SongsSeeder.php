@@ -20,16 +20,14 @@ class SongsSeeder extends Seeder
     public function run($genreCount)
     {
        
-       
-        
-
-       for($i = 0; $i <= 5; $i++){
-        DB::table('songs')->insert([
-            'id' => null,
-            'song_name' => Str::random(10),
-            'genre_id' => rand(1,$genreCount),
-            'tijds_duur' => rand(1,5),
-        ]);
+       for($i = 0; $i <= 100; $i++){
+        $rand = rand(2,$genreCount+1);
+            DB::table('songs')->insert([
+                'id' => null,
+                'song_name' => Str::random(10),
+                'genre_id' => $rand,
+                'tijds_duur' => rand(1,5),
+            ]);
        }
 
         

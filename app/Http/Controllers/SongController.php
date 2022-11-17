@@ -23,6 +23,7 @@ class SongController extends Controller
     {
         $theId = $request->all();
         $song = Songs::find($theId['genres'][0]);
+        
         return view('songs',['songs'=>$song]);
 
     }
