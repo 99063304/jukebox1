@@ -4,7 +4,8 @@
 @if(isset($songs))
  <div class='card' style="width: 100%;">
    <p>Songname: {{ $songs->song_name }}</p>
-   <p>Tijdsduur: {{ $songs->tijds_duur}}</p> 
+   <p>Bandname: {{ $songs->band_name }}</p>
+   <p>Minuten: {{ $songs->tijds_duur}}</p> 
  </div>
  @else
  @foreach($allSongs as $oneSong)

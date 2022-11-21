@@ -25,6 +25,7 @@ class SongsSeeder extends Seeder
             DB::table('songs')->insert([
                 'id' => null,
                 'song_name' => Str::random(10),
+                'band_name' => Str::random(6),
                 'genre_id' => $rand,
                 'tijds_duur' => rand(1,5),
             ]);

@@ -117,11 +117,22 @@ class PlaylistController extends Controller
         return Redirect::to($newUrl);
     }
     public function index9(){
-        $savedListNames = PlaylistSavedList::all();
+        $savedListNames = PlaylistSavedList::where('user_id', 2)->get();
+       
         return view('lijstopvragen')->with('savedListNames',$savedListNames);
     }
     public function index10 (Request $request){
         $savedList = PlaylistSavedList::find($request->route('id'));
         return view('opvragen')->with('savedList',$savedList);
+    }
+    public function index11 (Request $request){
+        $pname = $request->all()['pname'];
+        $pid = $request->all()['pid'];
+        playlistSavedList::where('id',$pid)->update(['playlist_name' => $pname]);
+
+
+        $currentURL = url()->current();
+        $newUrl = str_replace('UP', 's', $currentURL);
+        return Redirect::to($newUrl);
     }
 }

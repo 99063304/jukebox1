@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/playlistPD', [PlaylistController::class, 'index8'])->name('deletePlaylist');
   Route::get('/playlistOP', [PlaylistController::class, 'index9'])->name('opvragenPlaylist');
   Route::get('/playlistOP/{id}', [PlaylistController::class, 'index10'])->name('playlist');
+  Route::post('/playlistUP', [PlaylistController::class, 'index11'])->name('updatePlaylistName');
 });
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -1,7 +1,13 @@
 @extends('layouts.header')
 @section('content')
-
-   <h1>PlaylistName: @if($playlistname != '1')  {{ $playlistname->playlist_name }} @else  @endif</h1>
+   <form action="{{ route('updatePlaylistName') }} " method='post'>
+   {{ csrf_field() }}
+    <h1>PlaylistName:</h1>
+        @if($playlistname != '1')    
+        <input type="text" name="pname" value="{{ $playlistname->playlist_name }}"><br><br>
+        @endif
+        <button name='pid' value='{{ $playlistname->id }}' type="submit">Playlistnaam Aanpassen</button>
+   </form><br>
    <form action="{{ route('addSongSave.store') }} " method='post'>
         {{ csrf_field() }}
         <select name="addSongo">

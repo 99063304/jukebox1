@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->id();
             $table->string('song_name');
+            $table->string('band_name');
             $table->smallInteger('genre_id');
             $table->smallInteger('tijds_duur');
         });
