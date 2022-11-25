@@ -1,7 +1,7 @@
 @extends('layouts.header')
 @section('content')
  
-
+<!-- Loads a playlist from database -->
 
 <div class="card" style="width: 18rem;">
   <?php $countTime = 0; ?>

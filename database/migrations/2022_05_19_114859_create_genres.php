@@ -12,7 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {// creates genre migration
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
             $table->string('genre_name');

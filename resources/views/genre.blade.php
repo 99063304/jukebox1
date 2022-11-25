@@ -1,9 +1,9 @@
 @extends('layouts.header')
-
+<!-- LOads One genre table or all -->
 @section('content')
     @if(!isset($oneGenre))
         @foreach ($genres as $genre)
-        <form action="{{ route('index.store') }}" method="post">
+        <form action="{{ route('genre') }}" method="post">
             {{ csrf_field() }}
             <input type="hidden" name="genres[]" value="{{ $genre->id }}">
             <div class="card" style="height: 200px; width: 200px">

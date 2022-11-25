@@ -19,6 +19,7 @@ class SongsSeeder extends Seeder
      */
     public function run($genreCount)
     {
+        // makes seeder
        
        for($i = 0; $i <= 100; $i++){
         $rand = rand(2,$genreCount+1);

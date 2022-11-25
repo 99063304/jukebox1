@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    { // connects Seeders 
        $genreCount = \App\Models\Genres::count();
        $this->call( GenreSeeder::class);
        $this->callWith( SongsSeeder::class,['genreCount'=> $genreCount ]);

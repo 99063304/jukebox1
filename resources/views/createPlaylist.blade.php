@@ -1,5 +1,6 @@
 @extends('layouts.header')
 @section('content')
+<!-- Loads Forms for adding songs en deleting songs en playlist in session and saving playlist to database -->
  <h1>PlaylistName: @if($playlistname != '1')  {{ $playlistname }}@else {{ $AllSession['playlistname'] }} @endif</h1>
  <form action="{{ route('addSong.store') }} ">
   {{ csrf_field() }}
@@ -14,11 +15,9 @@
  <form action="{{ route('deleteSong') }} ">
     {{ csrf_field() }}
     <select name="deleteSong" id="cars">
-      <?php $i = 0; ?>
       @foreach($AllSession['SongName'] as $song => $value) 
         @foreach($allsongs as $songs)
           @if($songs['id'] == $value)
-          <?php $i++;?>
           <option value="{{$song}}"> {{ $songs['song_name']  }} </option>
           @endif
         @endforeach

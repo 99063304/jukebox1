@@ -22,25 +22,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'showHome'])->name('home');
+
 Route::group(['middleware' => 'auth'], function() {
-  Route::get('/genre', [GenreController::class, 'index']);
-  Route::post('/genre', [GenreController::class, 'getIndex'])->name('index.store');
-  Route::get('/songs', [SongController::class, 'index']);
+  Route::get('/genre', [GenreController::class, 'getGenres']);
+  Route::post('/genre', [GenreController::class, 'getGenre'])->name('genre');
+  Route::get('/songs', [SongController::class, 'getSongs']);
   Route::post('/songs', [SongController::class, 'getSong'])->name('song.store');
-  Route::get('/playlists', [PlaylistController::class, 'index']);
-  Route::post('/playlists', [PlaylistController::class, 'toDoIndex'])->name('create.store');
-  Route::get('/playlist', [PlaylistController::class, 'index2'])->name('addSong.store');  
-  Route::get('/playlistD', [PlaylistController::class, 'index3'])->name('deleteSong');
-  Route::get('/playlistS', [PlaylistController::class, 'index4'])->name('save.playlist');
-  Route::post('/playlistO', [PlaylistController::class, 'index5'])->name('old.playlist');
-  Route::post('/playlistOS', [PlaylistController::class, 'index6'])->name('addSongSave.store');
-  Route::post('/playlistOD', [PlaylistController::class, 'index7'])->name('deleteSongSave');
-  Route::post('/playlistPD', [PlaylistController::class, 'index8'])->name('deletePlaylist');
-  Route::get('/playlistOP', [PlaylistController::class, 'index9'])->name('opvragenPlaylist');
-  Route::get('/playlistOP/{id}', [PlaylistController::class, 'index10'])->name('playlist');
-  Route::post('/playlistUP', [PlaylistController::class, 'index11'])->name('updatePlaylistName');
+  Route::get('/playlists', [PlaylistController::class, 'getOldPlaylist']);
+  Route::post('/playlists', [PlaylistController::class, 'addPlaylistName'])->name('create.store');
+  Route::get('/playlist', [PlaylistController::class, 'addSongs'])->name('addSong.store');  
+  Route::get('/playlistDelete', [PlaylistController::class, 'deleteSong'])->name('deleteSong');
+  Route::get('/playlistSave', [PlaylistController::class, 'savePlaylist'])->name('save.playlist');
+  Route::post('/playlistOld', [PlaylistController::class, 'loadSavedPlaylistEdit'])->name('old.playlist');
+  Route::post('/playlistOldSave', [PlaylistController::class, 'saveSongInDatabase'])->name('addSongSave.store');
+  Route::post('/playlistOldDelete', [PlaylistController::class, 'deleteSongFromPlaylist'])->name('deleteSongSave');
+  Route::post('/playlistPlaylistDelete', [PlaylistController::class, 'deletePlaylist'])->name('deletePlaylist');
+  Route::get('/playlistOldPlaylist', [PlaylistController::class, 'getAllPlaylist'])->name('opvragenPlaylist');
+  Route::get('/playlistOldPplaylist/{id}', [PlaylistController::class, 'showSelectedPlaylist'])->name('playlist');
+  Route::post('/playlistUpdatePlaylist', [PlaylistController::class, 'updatePlaylistName'])->name('updatePlaylistName');
 });
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');

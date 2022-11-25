@@ -12,7 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {   // Makes migration and defines relationship
         Schema::create('playlist_saved_list_songs', function (Blueprint $table) {
             $table->integer('playlist_saved_list_id')->unsigned();
             $table->integer('songs_id')->unsigned();

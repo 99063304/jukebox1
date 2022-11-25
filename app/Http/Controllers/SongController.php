@@ -13,14 +13,15 @@ class SongController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function getSongs()
     { 
-      //  Session::flush();
-        $allSongs = Songs::All();
+      // Gets all songs en gives them to the view
+      $allSongs = Songs::All();
         return view('songs', ['allSongs'=> $allSongs]);
     }
     public function getSong(Request $request)
     {
+      // Gets Specific song en gives them to the view
         $theId = $request->all();
         $song = Songs::find($theId['genres'][0]);
         

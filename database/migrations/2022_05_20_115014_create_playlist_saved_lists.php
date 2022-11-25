@@ -12,7 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    { // creates migration
         Schema::create('playlist_saved_list', function (Blueprint $table) {
             $table->increments('id');
             $table->string('playlist_name');

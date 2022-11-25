@@ -14,13 +14,13 @@ class GenreController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
+    public function getSongs()
+    { // gets all genre info en gives it to vie
         $genres = Genres::all(); 
         return view('genre',['genres'=>$genres]);
     }
-    public function getIndex(Request $request)
-    {
+    public function getSong(Request $request)
+    { // gets specific genre and gives it to view
         $theId = $request->all()['genres'][0];
         $song = Songs::where('genre_id', $theId)->get();
         return view('genre',['oneGenre'=>$song]);

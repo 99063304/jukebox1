@@ -15,9 +15,9 @@ class GenreSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    { // makes Seeder
         
-       
+       // ma
 
          DB::table('genres')->insert([
             'id' => null,
